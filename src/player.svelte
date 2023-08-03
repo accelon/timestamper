@@ -62,7 +62,7 @@ const onpause=()=>{
 }
 </script>
 <svelte:window on:keydown={onKeyDown} /> 
-
+{#key $sutra.audio}
 {#if $sutra.audio}
 <div>
 <audio bind:this={audio} on:play={onplay} on:pause={onpause} controls style={"height:1em;width:"+paneWidth()}>
@@ -70,3 +70,4 @@ const onpause=()=>{
 </audio>
 </div>
 {/if}
+{/key}

@@ -16,7 +16,7 @@ const createTimestamps=(pbcount,linecount)=>{
     return arr;
 }
 
-export const save=async ()=>{
+export const savefile=async ()=>{
     const fh=get(filehandle);
     if (!fh) return;//test
     get(sutra).timestamps=get(timestamps);
@@ -36,14 +36,13 @@ export const loadSutra=(json)=>{
     loadFolio(json.folio,(pbcount)=>{
         if (!json.timestamps||!json.timestamps.length) {
             json.timestamps=createTimestamps(pbcount,json.foliolines);
-            
         }         
         timestamps.set(json.timestamps);
     })
     sutra.set(json);
 }
 
-export const openjson=async ()=>{
+export const openfile=async ()=>{
     const filehandles = await window.showOpenFilePicker(pickerOpts);
     const f=filehandles[0];
     const workingfile=await f.getFile();
@@ -58,4 +57,15 @@ export const openjson=async ()=>{
     loadSutra(json)
  
     filehandle.set(filehandles[0]);
+}
+
+export const newfile=async ()=>{
+    const newfile=await window.showSaveFilePicker(pickerOpts);
+    
+    const json=Object.assign({},get(sutra));
+    console.log(get(sutra),json)
+    json.timestamps=createTimestamps(json.foliolines||5);
+    loadSutra(json);
+    filehandle.set(newfile);
+    savefile();
 }

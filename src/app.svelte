@@ -7,7 +7,7 @@ import { onMount } from 'svelte';
 import { loadSutra } from './workfile.js';
 
 onMount(()=>{
-    loadSutra({"folio":"agmd1","audio":"agmd1","caption":"長阿含經卷一（試作無法存檔）","foliolines":6, "timestamps":[]});
+    loadSutra({"folio":"agmd1","audio":"agmd1","foliolines":6, "timestamps":[]});
 })
 </script>
 

@@ -19,16 +19,18 @@ const gopage=(pb)=>{
 <td>
 <div class="help">
 誦經時間軸 2023.8.3
+<br/>輸入圖檔及音檔名稱，行數(北5南6)，按新增。
 <br/>上下鍵 上下折
 <br/>左右鍵 前後句
 <br/>空白 播放/暫停
 <br/>Enter 設定時間戳
 <br/>Backspace 往回跳三秒
 <br/>Del 修正上一句
-<br/>數字 往前跳秒數 1~9, Ctrl-數字 往回跳秒數 
+<br/>數字 往前跳秒數 1~9, Ctrl-數字 往回跳 
 <br/>點綠色數字移到音頻及圖檔位置。
-<br/>紅色數字表示錯誤，不得比之前的數字小。
-mp3 to local cache 
+<br/>紅色數字表示錯誤，不得小於之前的時間。
+<br/>alt-n 新檔📄 alt-s 存檔💾 alt-o 開檔📂 
+<br/>agmd長，agmm中，agms雜，agmu增
 </div>
 </td>
 </tr></table>
