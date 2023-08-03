@@ -1,12 +1,12 @@
 <script>
-import {images,thezip,timestampcursor,activefolioid,activepb,maxpage} from './store.js'
+import {images,thezip,timestampcursor,activepb,maxpage,FolioChars,sutra,foliosrc} from './store.js'
 import Swipe from './3rdparty/swipe.svelte';
 import SwipeItem from './3rdparty/swipeitem.svelte';
 import { get } from 'svelte/store';
 
 $: defaultIndex=$maxpage-1;
 let swiper,swiping=false;
-let message='loading';
+let message='loading',stableleft;
 $: totalpages=$maxpage;
 const swipeConfig = {
     autoplay: false,
@@ -76,19 +76,28 @@ const gotoPb=(pb)=>{
     }
 
 }
-
+const folioCursorStyle=(line,ch=0)=>{
+    const frame=imageFrame()
+    const unitw=(frame.width/$sutra.foliolines)||0;
+    const unith=(frame.height/FolioChars)||0;
+    const left=Math.floor(($sutra.foliolines-line-1)*unitw);
+    const top=Math.floor(unith*ch)-6;
+    const style=`left:${left}px;top:${top}px;width:${unitw}px;height:${unith}px`;
+    return style;
+}
 $: imgs= $images;
 $: gotoPb($activepb)
     //{previewimages[previewimages.length-idx-1]
 </script>
 <!-- svelte-ignore a11y-click-events-have-key-events -->
 <div class="swipe-holder" on:wheel={mousewheel} >
-{#if $activefolioid}
+{#if $foliosrc}
 <Swipe bind:this={swiper} {...swipeConfig} {defaultIndex} on:click={onclick} on:change={swipeChanged}>
     {#each imgs as image,idx}
     <SwipeItem><img alt='no' class="swipe"  src={imgs[imgs.length-idx-1]}/></SwipeItem>
     {/each}    
 </Swipe>
+<div class="foliocursor" style={folioCursorStyle($timestampcursor)}></div>
 <span class="pagenumber">{totalpages-defaultIndex}</span>
 {:else}
 {message}

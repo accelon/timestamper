@@ -1,29 +1,11 @@
 <script>
     
-import InputNumber from './comps/inputnumber.svelte'
-import {sutras, sutra, thezip,activesutra,activejuan,createTimestamps} from './store.js'
-import {loadFolio} from './folio.js'
-import {get}  from 'svelte/store'
+import {filehandle,dirty, sutra} from './store.js'
 import Player from './player.svelte'
-let value=1;
-const selectsutra=(e)=>{
-    activesutra.set(e.target.selectedIndex);
-    value=1;
-}
-$: maxjuan=sutras[$activesutra].juancount;
-$: {
-    loadFolio(sutras[$activesutra].bkid+value,()=>{
-        createTimestamps(get(thezip).files.length);
-})
-};
-
-
-$: activejuan.set(value);
+import {save,openjson} from './workfile.js'
 </script>
-<select on:change={selectsutra}>
-{#each sutras as sutra,idx}
-<option>{sutra.caption}</option>
-{/each}
-</select>
-<InputNumber bind:value max={maxjuan}/>
+
+<button disabled={$dirty&&$filehandle} title="alt-p" class="clickable" on:click={openjson}>📂</button>
+<button disabled={!$dirty||!$filehandle} title="alt-s" on:click={save}>💾</button>
+{$sutra?.caption}
 <Player/>

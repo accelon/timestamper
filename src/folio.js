@@ -1,12 +1,17 @@
 import {ZipStore} from 'ptk/zip';
-import {thezip,images,foliopath,activefolioid, maxpage} from './store.js'
+import {thezip,images,foliopath,maxpage,timestampcursor,activepb,foliosrc,dirty} from './store.js'
 import {get} from 'svelte/store'
 export const loadFolio=async (folio,cb)=>{
+    
     if (!folio) return;
     const imgs=[]
     const src=get(foliopath)+folio+".zip";
+    if (get(foliosrc).src==src) {//same
+        cb&&cb(get(thezip).files.length);
+        return;
+    }
+    foliosrc.set('');
     let res=null,buf=null,zip=null;
-    activefolioid.set('');
     try {
         res=await fetch(src);
         buf=await res.arrayBuffer();
@@ -26,11 +31,12 @@ export const loadFolio=async (folio,cb)=>{
         }
     }    
     images.set(imgs);
-    
     maxpage.set(zip.files.length)
-
     setTimeout(()=>{
-        activefolioid.set(folio)
-        cb&&cb()
+        activepb.set(0);
+        timestampcursor.set(0);
+        cb&&cb(zip.files.length);
+        dirty.set(0)
+        foliosrc.set(src); //trigger folioview
     },100)
 }

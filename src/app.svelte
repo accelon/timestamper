@@ -1,22 +1,24 @@
 <script>
 import FolioView from './folioview.svelte'
+import FolioLastLineView from './foliolastlineview.svelte'
 import Toolbar from './toolbar.svelte'
 import TimeStamps from './timestamps.svelte'
-import {paneWidth} from './store.js'
+import { onMount } from 'svelte';
+import { loadSutra } from './workfile.js';
 
+onMount(()=>{
+    loadSutra({"folio":"agmd1","audio":"agmd1","caption":"長阿含經卷一（試作無法存檔）","foliolines":6, "timestamps":[]});
+})
 </script>
 
 <div class="app">
-<table>
-    <tr>
-        <td  style={"width:"+paneWidth(true)}><FolioView/></td>
-        <td class="pane">
+        <div class="pane" style={"width:24vw"}><FolioView/></div>
+        <div class="pane" style={"width:4vw"}><FolioLastLineView/></div>
+        <div class="pane" style={"width:70vw"}>
             <Toolbar/>
             <TimeStamps/>       
-        </td>
-    </tr>
-</table>
+        </div>
 </div>
 <style>
-.app {height:100vh} /* splitpane divider need this */
+.app {height:100vh;display: flex;flex-direction: row;} /* splitpane divider need this */
 </style>
