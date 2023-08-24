@@ -1,17 +1,11 @@
 <script>
 import { get } from "svelte/store";
-import { activepb, theaudio, timestampcursor } from "./store";
+import { activepb, theaudio, timestampcursor ,humantime} from "./store";
 
 export let timestamp=[];
 export let cursor;
 export let pb;
-const humantime=(ts,frag)=>{
-    const t=Math.round(ts);
-    const h= Math.floor(t/3600);
-    const m= Math.floor((t-h*3600)/60).toString();
-    let s= ts-h*3600-m*60;
-    return (h?h+":":"")+m.padStart(2,'0')+":"+ (frag?s.toFixed(2):Math.round(s).toString().padStart(2,'0'));
-}
+
 const gototimestamp=(idx,ts)=>{
     timestampcursor.set(idx);
     activepb.set(pb);

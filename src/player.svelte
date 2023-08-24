@@ -1,6 +1,6 @@
 <script>
 import {audiopath, stampdelay,settrack,timestamps,playing,
-    seektrack,theaudio,paneWidth, activepb,timestampcursor,setTimestamp, sutra} from './store.js'
+    seektrack,theaudio,paneWidth, activepb,timestampcursor,setTimestamp, sutra, adjusttime, getTimestamp} from './store.js'
 
 let audio;
 $: theaudio.set(audio)
@@ -8,7 +8,13 @@ const onKeyDown=(e)=>{
     const num=parseInt(e.key);
     if (e.code=='Space') {
         if (e.target.nodeName=='AUDIO') return;
-        audio.paused?audio.play():audio.pause();
+        if (audio.paused) {
+            const ts=getTimestamp();
+            audio.currentTime=ts;
+            audio.play()
+        } else {
+            audio.pause();
+        }
         e.preventDefault();
     } else if (e.code=='Enter' || e.code=='NumpadEnter') {
         setTimestamp(audio.currentTime-$stampdelay)
@@ -37,9 +43,27 @@ const onKeyDown=(e)=>{
         if ($timestampcursor>0) {
             timestampcursor.set($timestampcursor-1);
             e.preventDefault();
+        }   
+    } else if (e.key=='-') {
+        let ts=getTimestamp();
+        if (typeof ts=='number'){
+            ts-=0.25
+            if(ts<0) ts=0.01;
+            adjusttime.set(ts);
+            audio.currentTime=ts;
+            setTimestamp(ts);
+        }
+    } else if (e.key=='+' || e.key=='=') {
+        let ts=getTimestamp();
+        if (typeof ts=='number'){
+            ts+=0.25
+            adjusttime.set(ts);
+            audio.currentTime=ts;
+            setTimestamp(ts);
         }
     } else if (e.key=='Backspace') {
         seektrack(-3);
+        adjusttime.set(audio.currentTime);
     } else if (e.key=='Delete') {
         if ($timestampcursor>0) {
             const cursor=$timestampcursor-1;
