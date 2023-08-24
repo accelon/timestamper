@@ -34,7 +34,11 @@ export const loadSutra=(json)=>{
 
     if (!json.foliolines) json.foliolines=5;
     loadFolio(json.folio,(pbcount)=>{
-        json.timestamps=createTimestamps(pbcount,json.foliolines);
+        if (!json.timestamps||!json.timestamps.length) {
+            json.timestamps=createTimestamps(pbcount,json.foliolines);
+        } else {
+            json.timestamps.length=pbcount;
+        }
         timestamps.set(json.timestamps);
     })
     sutra.set(json);
