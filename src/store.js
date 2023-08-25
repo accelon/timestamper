@@ -42,7 +42,7 @@ export const getTimestamp=cursor=>{
     cursor=cursor||get(timestampcursor);
     const o=arr[get(activepb)];
     if (!o) return null;
-    return o[cursor];
+    return o[cursor] || o[cursor-1] || 0;
 }
 
 timestampcursor.subscribe( cursor=>{

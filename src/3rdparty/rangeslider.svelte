@@ -44,18 +44,26 @@
     right: ${(100 - Math.max(pos[0], (range ? pos[1] : pos[0])) * 100)||100}%;
   `;
 
- 
-
   function clamp() {
     setPos(value);
     setValue(pos);
   }
-</script>
+  function adjust(e){
+    if (e.target.classList[0]=='progress') { //left
+      setPos([(value[0]||min)-step,value[1]]);
+      setValue(pos)
+    } else if ((e.target.classList[0]=='track')) {  //right
+      setPos([(value[0]||min)+step,value[1]]);
+      setValue(pos)
+    }
+  }
 
+</script>
 
 <div>
 <input type="number" value={value[0]} name={name[0]} />
-<div class="track">
+<!-- svelte-ignore a11y-click-events-have-key-events -->
+<div class="track"  on:click={adjust}>
   <div
     class="progress"
     style={progress} />
@@ -94,5 +102,10 @@
   background: var(--progress-bg, #fef1a6);
 }
 
-
+.thumb {
+   width: 1.2em;
+   height: 1.2em;
+   border-radius: 0.6em;
+   background: var(--thumb-bg, #f8b358);
+ }
 </style>
