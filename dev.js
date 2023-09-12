@@ -13,10 +13,10 @@ let ctx=await esbuild
     logLevel: "info",
   })
   .catch(() => process.exit(1));
-await ctx.watch();
-/*   esbuild server cannot random access audio
+//await ctx.watch();
+//   esbuild server cannot random access audio
  await ctx.serve({
       servedir: 'dist',
       port:5090,
       host:"127.0.0.1"
- })*/
+ })

@@ -18,7 +18,10 @@ const gopage=(pb)=>{
 </td>
 <td>
 <div class="help">
-誦經時間軸 2023.8.24
+誦經時間軸 2023.9.12 
+<br/>教學視頻<a href="https://youtu.be/BEv4NZ9b_MY" target=_new>Youtube</a>
+<a href="https://nissaya.cn/video/timestamper.mp4" target=_new>無法訪問油管點此</a>
+<div>
 <br/>輸入圖檔及音檔名稱，行數(北5南6)，按新增。
 <br/>上下鍵 上下折
 <br/>左右鍵 前後句
@@ -32,6 +35,7 @@ const gopage=(pb)=>{
 <br/>紅色數字表示錯誤，不得小於之前的時間。
 <br/>alt-n 新檔📄 alt-s 存檔💾 alt-o 開檔📂 
 <br/>agmd長，agmm中，agms雜，agmu增
+</div>
 </div>
 </td>
 </tr></table>
