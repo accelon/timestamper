@@ -17,7 +17,7 @@ const onKeyDown=(e)=>{
         }
         e.preventDefault();
     } else if (e.code=='Enter' || e.code=='NumpadEnter') {
-        setTimestamp(audio.currentTime-$stampdelay)
+        setTimestamp(audio?.currentTime-$stampdelay)
         if ($timestampcursor+1<$sutra.foliolines) timestampcursor.set($timestampcursor+1);
         else {
             activepb.set($activepb+1);    

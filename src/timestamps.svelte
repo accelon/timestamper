@@ -5,6 +5,7 @@ import PageTimeStamp from './pagetimestamp.svelte';
 const gopage=(pb)=>{
     activepb.set(pb)
 }
+
 </script>
 <table><tr><td>
 <div class="timestamps">
@@ -18,7 +19,7 @@ const gopage=(pb)=>{
 </td>
 <td>
 <div class="help">
-誦經時間軸 2023.9.12 
+誦經時間軸 2023.9.13 
 <br/>教學視頻<a href="https://youtu.be/BEv4NZ9b_MY" target=_new>Youtube</a>
 <a href="https://nissaya.cn/video/timestamper.mp4" target=_new>無法訪問油管點此</a>
 <div>

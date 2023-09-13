@@ -39,6 +39,10 @@ export const loadSutra=(json)=>{
         } else {
             json.timestamps.length=pbcount;
         }
+        for (let i=0;i<json.timestamps.length;i++) {
+            if (!json.timestamps[i]) json.timestamps[i]=new Array(json.foliolines);
+            json.timestamps[i].length=json.foliolines;
+        }        
         timestamps.set(json.timestamps);
     })
     sutra.set(json);
@@ -67,6 +71,7 @@ export const newfile=async ()=>{
     const json=Object.assign({},get(sutra));
     console.log(get(sutra),json)
     json.timestamps=createTimestamps(json.foliolines||5);
+
     loadSutra(json);
     filehandle.set(newfile);
     savefile();
