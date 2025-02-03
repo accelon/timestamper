@@ -16,8 +16,8 @@ export const timestamps=writable([]);
 export const adjusttime=writable(0);
 const host=document.location.host;
 const localhost=~host.indexOf('127.0.0.1')||~host.indexOf('localhost');
-export const foliopath=writable(  localhost?'folio/':'https://dharmacloud.github.io/swipegallery/folio/' );
-export const audiopath=writable(  localhost?'baudio/':'https://nissaya.cn/baudio/' );
+export const foliopath=writable(  localhost?'folio/':'https://'+host+'/ylz/folio/' );
+export const audiopath=writable(  localhost?'baudio/':'https://'+host+'/baudio/' );
 
 export const filehandle=writable(null);
 export const dirty=writable(0)
