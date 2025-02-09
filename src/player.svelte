@@ -3,6 +3,7 @@ import {audiopath, stampdelay,settrack,timestamps,playing,
     seektrack,theaudio,paneWidth, activepb,timestampcursor,setTimestamp, sutra, adjusttime, getTimestamp} from './store.js'
 
 let audio;
+
 $: theaudio.set(audio)
 const onKeyDown=(e)=>{
     const num=parseInt(e.key);
